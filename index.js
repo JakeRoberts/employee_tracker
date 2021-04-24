@@ -7,5 +7,6 @@ orm.getDepartments(console.table);
 // creating data in the table
 // orm.addDepartment({name:"IT"}, console.log);
 // orm.getDepartments(console.table);
-orm.updateDepartment({name:"R&D"}, 1, console.log);
+// orm.updateDepartment({name:"R&D"}, 1, console.log);
+orm.deleteDepartment(1, console.log);
 orm.getDepartments(console.table);

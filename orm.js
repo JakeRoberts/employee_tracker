@@ -72,6 +72,30 @@ const updateDepartment = (data, id, cb) => {
     });
 };
 
+const deleteEmployee = (id, cb) => {
+    const sql = `DELETE FROM employee WHERE id="${id}"`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+}
+
+const deleteRole = (id, cb) => {
+    const sql = `DELETE FROM role WHERE id="${id}"`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+}
+
+const deleteDepartment = (id, cb) => {
+    const sql = `DELETE FROM department WHERE id="${id}"`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+}
+
 module.exports = {
-    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment, updateEmployee, updateRole, updateDepartment
+    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment, updateEmployee, updateRole, updateDepartment, deleteEmployee, deleteRole, deleteDepartment
 };
