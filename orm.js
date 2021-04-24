@@ -30,7 +30,7 @@ const addEmpolyee = (data, cb) => {
         if (err) throw err;
         cb(result);
     });
-}
+};
 
 const addRole = (data, cb) => {
     const sql = `Insert Into role (title, salary, department_id) values ("${data.title}", "${data.role}", "${data.department_id}")`;
@@ -38,7 +38,7 @@ const addRole = (data, cb) => {
         if (err) throw err;
         cb(result);
     });
-}
+};
 
 const addDepartment = (data, cb) => {
     const sql = `Insert Into department (name) values ("${data.name}")`;
@@ -46,8 +46,32 @@ const addDepartment = (data, cb) => {
         if (err) throw err;
         cb(result);
     });
-}
+};
+
+const updateEmployee = (data, id, cb) => {
+    const sql = `Update employee set ? WHERE id=?`;
+    db.query(sql, [data, id], (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+};
+
+const updateRole = (data, id, cb) => {
+    const sql = `Update role set ? WHERE id=?`;
+    db.query(sql, [data, id], (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+};
+
+const updateDepartment = (data, id, cb) => {
+    const sql = `Update department set ? WHERE id=?`;
+    db.query(sql, [data, id], (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+};
 
 module.exports = {
-    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment
+    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment, updateEmployee, updateRole, updateDepartment
 };
