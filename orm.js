@@ -1,7 +1,9 @@
 const db = require('./db');
 
+
 const getEmployees = (cb) => {
-    const sql = "SELECT * FROM employee";
+    // const sql = "SELECT * FROM employee";
+    const sql= 'SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;'
     db.query(sql, (err, result) => {
         if (err) throw err;
         cb(result);
@@ -33,7 +35,7 @@ const addEmpolyee = (data, cb) => {
 };
 
 const addRole = (data, cb) => {
-    const sql = `Insert Into role (title, salary, department_id) values ("${data.title}", "${data.role}", "${data.department_id}")`;
+    const sql = `Insert Into role (title, salary, department_id) values ("${data.title}", "${data.salary}", "${data.department_id}")`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         cb(result);
@@ -41,7 +43,7 @@ const addRole = (data, cb) => {
 };
 
 const addDepartment = (data, cb) => {
-    const sql = `Insert Into department (name) values ("${data.name}")`;
+    const sql = `Insert INTO department (name) values ("${data.name}")`;
     db.query(sql, (err, result) => {
         if (err) throw err;
         cb(result);
@@ -96,6 +98,14 @@ const deleteDepartment = (id, cb) => {
     });
 }
 
+const finalEmployees = () => {
+    const sql= `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department`;
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        cb(result);
+    });
+}
+
 module.exports = {
-    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment, updateEmployee, updateRole, updateDepartment, deleteEmployee, deleteRole, deleteDepartment
+    getEmployees, getRoles, getDepartments, addEmpolyee, addRole, addDepartment, updateEmployee, updateRole, updateDepartment, deleteEmployee, deleteRole, deleteDepartment, finalEmployees
 };

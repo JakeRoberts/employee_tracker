@@ -26,6 +26,5 @@ CREATE TABLE employee (
    role_id INT,
    foreign key (role_id) references role(id),
    manager_id INT default 0,
-   foreign key (manager_id) references employee(id),
    primary key (id)
 );
